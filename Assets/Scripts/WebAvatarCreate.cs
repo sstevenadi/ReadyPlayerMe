@@ -16,12 +16,21 @@ namespace Wolf3D.ReadyPlayerMe.AvatarSDK
         public GameObject loadingPopUp;
 
         [Header("WebView")]
-        public WebView m_WebView;
+        public WebView webView;
+
+        [Header("Stats")] 
+        public GameObject stats;
+        public Transform cameraLook;
         
         // Avatar Url
         private GameObject m_Avatar;
         private string m_URL;
-        private AvatarLoader m_AvatarLoader = new AvatarLoader();
+        private AvatarLoader m_AvatarLoader;
+
+        private void Awake()
+        {
+            m_AvatarLoader = new AvatarLoader();
+        }
 
         private void Start()
         {
@@ -40,18 +49,18 @@ namespace Wolf3D.ReadyPlayerMe.AvatarSDK
 
         public void DisplayWebView()
         {
-            if(m_WebView == null)
+            if(webView == null)
             {
-                m_WebView = FindObjectOfType<WebView>();
+                webView = FindObjectOfType<WebView>();
             }
-            else if (m_WebView.Loaded)
+            else if (webView.Loaded)
             {
-                m_WebView.SetVisible(true);
+                webView.SetVisible(true);
             }
             else
             {
-                m_WebView.CreateWebView();
-                m_WebView.OnAvatarCreated = OnAvatarCreated;
+                webView.CreateWebView();
+                webView.OnAvatarCreated = OnAvatarCreated;
             }
         }
 
@@ -59,7 +68,7 @@ namespace Wolf3D.ReadyPlayerMe.AvatarSDK
         private void OnAvatarCreated(string url)
         {
 
-            m_WebView.SetVisible(false);
+            webView.SetVisible(false);
             loadingPopUp.SetActive(true);
             popUp.SetActive(false);
             
@@ -76,6 +85,9 @@ namespace Wolf3D.ReadyPlayerMe.AvatarSDK
             // Set Avatar to newly created
             m_Avatar = avatar;
             
+            var statsObject = Instantiate(stats, avatar.transform);
+            statsObject.GetComponent<StatsLook>().lookAt = cameraLook.transform;
+
             loadingPopUp.SetActive(false);
             gameButton.SetActive(true);
         }

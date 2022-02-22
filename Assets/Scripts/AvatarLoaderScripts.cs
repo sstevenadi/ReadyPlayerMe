@@ -8,8 +8,12 @@ using Wolf3D.ReadyPlayerMe.AvatarSDK;
 public class AvatarLoaderScripts : MonoBehaviour
 {
     //dummy
-    private string avatarURL = "https://d1a370nemizbjq.cloudfront.net/2f934281-13ab-4f2d-b894-ba15e5c1d579.glb";
+    private string avatarURL = "https://d1a370nemizbjq.cloudfront.net/d8fd8fa5-578b-4c11-8f37-8fd7be868340.glb";
 
+    public GameObject stats;
+    public GameObject loading;
+
+    public Camera cam;
     public CinemachineVirtualCamera cvc;
     public RuntimeAnimatorController rac;
     public InputActionAsset iaa;
@@ -42,6 +46,7 @@ public class AvatarLoaderScripts : MonoBehaviour
         
         uigc.SetActive(true);
         SetupAvatar(avatar);
+        loading.SetActive(false);
     }
 
     private void SetupAvatar(GameObject avatar)
@@ -81,5 +86,7 @@ public class AvatarLoaderScripts : MonoBehaviour
         uicci.starterAssetsInputs = starterAssetsInputs;
         mdasc.playerInput = playerInput;
 
+        var statsObject = Instantiate(stats, avatar.transform);
+        statsObject.GetComponent<StatsLook>().lookAt = cam.transform;
     }
 }
