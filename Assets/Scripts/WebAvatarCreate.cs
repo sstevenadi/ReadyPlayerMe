@@ -87,6 +87,8 @@ namespace Wolf3D.ReadyPlayerMe.AvatarSDK
             
             var statsObject = Instantiate(stats, avatar.transform);
             statsObject.GetComponent<StatsLook>().lookAt = cameraLook.transform;
+            statsObject.transform.position = new Vector3(0.05f, 2f, 0f);
+            statsObject.transform.localScale = new Vector3(0.013f, 0.013f, 1);
 
             loadingPopUp.SetActive(false);
             gameButton.SetActive(true);

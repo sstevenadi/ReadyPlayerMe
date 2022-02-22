@@ -8,7 +8,7 @@ using Wolf3D.ReadyPlayerMe.AvatarSDK;
 public class AvatarLoaderScripts : MonoBehaviour
 {
     //dummy
-    private string avatarURL = "https://d1a370nemizbjq.cloudfront.net/d8fd8fa5-578b-4c11-8f37-8fd7be868340.glb";
+    private string avatarURL = "https://d1a370nemizbjq.cloudfront.net/2f934281-13ab-4f2d-b894-ba15e5c1d579.glb";
 
     public GameObject stats;
     public GameObject loading;
@@ -88,5 +88,6 @@ public class AvatarLoaderScripts : MonoBehaviour
 
         var statsObject = Instantiate(stats, avatar.transform);
         statsObject.GetComponent<StatsLook>().lookAt = cam.transform;
+        statsObject.transform.localScale = new Vector3(0.004f, 0.004f, 1);
     }
 }
