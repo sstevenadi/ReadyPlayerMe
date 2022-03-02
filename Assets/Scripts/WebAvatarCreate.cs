@@ -84,7 +84,7 @@ namespace Wolf3D.ReadyPlayerMe.AvatarSDK
             
             // Set Avatar to newly created
             m_Avatar = avatar;
-            
+
             var statsObject = Instantiate(stats, avatar.transform);
             statsObject.GetComponent<StatsLook>().lookAt = cameraLook.transform;
             statsObject.transform.position = new Vector3(0.05f, 2f, 0f);
@@ -96,7 +96,7 @@ namespace Wolf3D.ReadyPlayerMe.AvatarSDK
 
         public void ChangeScene()
         {
-            SceneManager.LoadScene("Playground");
+            SceneManager.LoadScene("Scenes/City");
         }
 
         public void DeletePlayer()
